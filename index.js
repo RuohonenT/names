@@ -1,22 +1,33 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = express();
 
-// Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// Put all API endpoints under '/api'
+
 app.get('/api/data', (req, res) => {
     res.sendFile(path.normalize(__dirname + '/data/names.json'))
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
+app.post('/send/', (req, res, next) => {
+
+    const user = {
+        name: req.body.name,
+    }
+    students = students.concat(student);
+    res.json(student);
+    next();
+})
+
+
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Password generator listening on ${port}`);
+console.log(`App is listening on ${port}`);
