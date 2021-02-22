@@ -16,17 +16,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-app.post('/send/', (req, res, next) => {
-
-    const user = {
-        name: req.body.name,
-    }
-    students = students.concat(student);
-    res.json(student);
-    next();
-})
-
-
 const port = process.env.PORT || 5000;
 app.listen(port);
 
